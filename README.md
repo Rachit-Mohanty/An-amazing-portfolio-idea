@@ -1,18 +1,66 @@
-# An Amazing Portfolio Idea 🚀
+R_OS (v2.0) | Rachit Mohanty Portfolio
 
-Welcome to this neo-brutalist-inspired portfolio template! This repository contains example code designed to help you kickstart your own unique, eye-catching personal website. 
+A high-performance digital portfolio environment architected with a strict Nothing OS aesthetic. This project translates digital chaos into a perfectly ordered logical bento-box grid, featuring monochrome palettes, signature red accents, and the authentic NDot 57 typography.
 
-Neo-brutalism is all about breaking the traditional rules of web design—think bold colors, harsh, unblurred shadows, stark typography, and thick visible borders. It’s raw, unapologetic, and the perfect canvas to showcase your work to the world.
+📱 Interface Concept
 
-## ✨ Features
+The UI is designed as a hardware-level operating system interface (R_OS). It utilizes "Glass-Brutalism"—combining frosted glass panels (glassmorphism) with stark grid lines and a dot-matrix background to create a unique, tactile user experience.
 
-* **Bold Neo-Brutalist Aesthetics:** High contrast, hard drop shadows, and unapologetic layouts.
-* **Fully Customizable:** This is just a starting point! Tweak the color palettes, adjust the borders, and make it completely your own.
-* **Responsive Design:** Ensures your bold design looks perfectly chaotic (in a good way) on both desktop and mobile screens.
+🛠️ Tech Stack
 
-## 🛠️ How to Use
+Framework: React.js
 
-This code is meant to be a foundation. Feel free to clone the repository, dig into the code, and adjust the components to fit your personal brand and the specific projects you want to highlight. 
+Styling: Tailwind CSS (Custom Nothing OS Palette)
 
-> **Note:** Don't be afraid to break things and experiment. The whole point of neo-brutalism is to color outside the lines!
+Typography: NDot 57 (Official Nothing OS Typeface)
 
+Icons: Lucide-React & Phosphor Icons
+
+Animation: CSS Keyframes & Framer-inspired transitions
+
+Core Logic: Vanilla JS Hardware Controllers (script.js)
+
+🧩 Installed Widgets (Projects)
+
+⚡ Atomix WX
+
+Lighting up the future.
+A shader-accelerated weather forecasting system.
+
+Tech: WebGL Shaders, Live Satellite Integration, Real-time planetary data.
+
+📊 ExpFlow
+
+Master your finances.
+In-flow finance automation with 3D visualizations.
+
+Tech: HTML/CSS/JS, Three.js, Unity WebGL hybrid engine.
+
+🎬 CineFlow
+
+Discover cinema. Anywhere. Anytime.
+Curated movie collections tailored to mood and genre.
+
+Tech: React, Tailwind, TMDB API Integration.
+
+⚙️ System Features
+
+True Dark Mode: Persistent theme management protocol.
+
+Hardware Identity: User-updatable avatar module with local buffer processing.
+
+OS Status Bar: Real-time system clock, battery, and connectivity indicators.
+
+Bento Grid: Mathematically locked responsive layout for all device classes.
+
+Slim Ticker: Razor-thin marquee for hardware-style data streaming.
+
+🛰️ Connectivity
+
+Developer: Rachit Mohanty
+
+GitHub: Rachit-Mohanty
+
+Transmission: divinecoder04@gmail.com
+
+© 2026 R_OS. ALL_SYSTEMS_OPERATIONAL.
