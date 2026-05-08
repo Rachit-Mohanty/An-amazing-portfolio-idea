@@ -1,55 +1,44 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="dark">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Rachit K. Mohanty | Neo-Brutalist Architect</title>
+    <title>Rachit K. Mohanty | OS Portfolio</title>
 
     <script src="https://cdn.tailwindcss.com"></script>
 
     <script src="https://unpkg.com/@phosphor-icons/web"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Space+Grotesk:wght@400;700;900&family=Space+Mono:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+    <!-- DotGothic16 acts as our NDot alternative, Inter for clean readability -->
+    <link href="https://fonts.googleapis.com/css2?family=DotGothic16&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+    
     <script>
         tailwind.config = {
+            darkMode: 'class',
             theme: {
                 extend: {
                     fontFamily: {
-                        display: ['"Archivo Black"', 'sans-serif'],
-                        sans: ['"Space Grotesk"', 'sans-serif'],
-                        mono: ['"Space Mono"', 'monospace'],
+                        ndot: ['"DotGothic16"', 'sans-serif'],
+                        sans: ['"Inter"', 'sans-serif'],
                     },
                     colors: {
-                        'neo-bg': '#f0f0f0',
-                        'neo-black': '#000000',
-                        'neo-white': '#ffffff',
-                        'neo-yellow': '#FFDE00',
-                        'neo-pink': '#FF5D8F',
-                        'neo-green': '#00F5D4',
-                        'neo-blue': '#3A86FF',
-                        'neo-purple': '#9D4EDD',
-                        'neo-red': '#FF0054',
+                        nred: '#E51921',     // Nothing red accent
+                        ndark: '#000000',    // True black
+                        ndarkcard: '#111111',// Slightly lighter black for cards
+                        ndarkborder: '#2A2A2A',
+                        nlight: '#F5F5F7',   // Apple/Nothing off-white
+                        nlightcard: '#FFFFFF',
+                        nlightborder: '#E5E5E5',
+                        expflow: '#D3EA5C',
+                        inflow: '#3A86FF',
+                        cineflow: '#49A078', // Cinematic green from screenshot
+                        atomix: '#00D4FF'    // Electric blue from Atomix screenshot
                     },
-                    boxShadow: {
-                        'neo': '6px 6px 0px 0px rgba(0, 0, 0, 1)',
-                        'neo-lg': '10px 10px 0px 0px rgba(0, 0, 0, 1)',
-                        'neo-sm': '3px 3px 0px 0px rgba(0, 0, 0, 1)',
-                    },
-                    borderWidth: {
-                        '3': '3px',
-                        '4': '4px',
-                        '5': '5px',
-                    },
-                    animation: {
-                        'enter-up': 'enterUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards',
-                    },
-                    keyframes: {
-                        enterUp: {
-                            '0%': { opacity: '0', transform: 'translateY(40px)' },
-                            '100%': { opacity: '1', transform: 'translateY(0)' },
-                        }
+                    borderRadius: {
+                        '4xl': '2.5rem',
+                        '5xl': '3rem',
                     }
                 }
             }
@@ -58,586 +47,394 @@
 
     <style>
         body {
-            background-color: #ffffff;
-            background-image: 
-                linear-gradient(#000 2px, transparent 2px),
-                linear-gradient(90deg, #000 2px, transparent 2px);
-            background-size: 40px 40px;
-            color: #000;
-            overflow-x: hidden;
-            scroll-behavior: smooth;
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+
+        /* Subtle Dotted Backgrounds */
+        .bg-dots {
+            background-image: radial-gradient(#d4d4d4 1.5px, transparent 1.5px);
+            background-size: 24px 24px;
         }
         
-        .bg-grid-fade {
-            position: absolute;
-            inset: 0;
-            background-color: rgba(255, 255, 255, 0.92);
-            z-index: -1;
+        .dark .bg-dots {
+            background-image: radial-gradient(#262626 1.5px, transparent 1.5px);
         }
 
-        .btn-neo, .card-neo, .input-neo, a {
-            transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+        /* Smooth scrollbar */
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: transparent; }
+        ::-webkit-scrollbar-thumb { background: #d4d4d4; border-radius: 4px; }
+        .dark ::-webkit-scrollbar-thumb { background: #333; }
+        
+        /* Widget Hover Effects */
+        .widget {
+            transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .widget:hover {
+            transform: scale(0.98);
         }
 
-        .btn-neo {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            padding: 16px 32px;
-            font-family: 'Space Mono', monospace;
-            font-weight: 900;
-            text-transform: uppercase;
-            letter-spacing: 0.05em;
-            border: 4px solid #000;
-            background-color: #ffffff;
-            box-shadow: 6px 6px 0px 0px #000;
-            cursor: pointer;
-            position: relative;
-        }
-
-        .btn-neo:hover {
-            transform: translate(-4px, -4px);
-            box-shadow: 10px 10px 0px 0px #000;
-        }
-
-        .btn-neo:active {
-            transform: translate(2px, 2px);
-            box-shadow: 2px 2px 0px 0px #000;
-        }
-
-        .btn-neo-primary { background-color: #FFDE00; }
-        .btn-neo-secondary { background-color: #000; color: #fff; }
-        .btn-neo-secondary:hover { background-color: #222; color: #fff; }
-        .input-neo {
-            width: 100%;
-            padding: 16px;
-            font-family: 'Space Mono', monospace;
-            font-weight: bold;
-            border: 4px solid #000;
-            background-color: white;
-            box-shadow: 4px 4px 0px 0px #000;
-            outline: none;
-        }
-
-        .input-neo:focus {
-            background-color: #E0FFFF;
-            box-shadow: 8px 8px 0px 0px #000;
-            transform: translate(-4px, -4px);
-        }
-        .card-neo {
-            border: 4px solid #000;
-            background-color: white;
-            box-shadow: 8px 8px 0px 0px #000;
-        }
-
-        .card-neo:hover {
-            transform: translate(-4px, -4px);
-            box-shadow: 14px 14px 0px 0px #000; 
-        }
-
+        /* Marquee Animation */
         .marquee-container {
             overflow: hidden;
             white-space: nowrap;
-            background: #FFDE00;
-            color: #000;
-            border-top: 4px solid #000;
-            border-bottom: 4px solid #000;
-            padding: 12px 0;
-            font-family: 'Archivo Black', sans-serif;
-            text-transform: uppercase;
-            font-size: 1.5rem;
         }
-        
         .marquee-content {
             display: inline-block;
-            animation: marquee 20s linear infinite; 
+            animation: marquee 25s linear infinite; 
             will-change: transform;
         }
-
         @keyframes marquee {
             0% { transform: translateX(0); }
             100% { transform: translateX(-50%); }
         }
 
-        .reveal-on-scroll {
-            opacity: 0;
-            transform: translateY(40px);
-            transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
-            will-change: opacity, transform;
-        }
-
-        .reveal-on-scroll.is-visible {
-            opacity: 1;
-            transform: translateY(0);
-        }
-
-        .delay-100 { transition-delay: 0.1s; }
-        .delay-200 { transition-delay: 0.2s; }
-        .delay-300 { transition-delay: 0.3s; }
-        .loader-neo {
-            width: 48px;
-            height: 48px;
-            border: 6px solid #000;
-            border-bottom-color: #FFDE00;
-            border-radius: 50%;
-            display: inline-block;
-            box-sizing: border-box;
-            animation: rotation 1s cubic-bezier(0.5, 0, 0.5, 1) infinite; /* Smoother spin */
-        }
-
-        @keyframes rotation {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
-        }
-        .text-outline { -webkit-text-stroke: 2px #000; color: transparent; }
-        .text-outline-white { -webkit-text-stroke: 2px #fff; color: #000; }
-        ::-webkit-scrollbar { width: 12px; }
-        ::-webkit-scrollbar-track { background: #f0f0f0; border-left: 2px solid #000; }
-        ::-webkit-scrollbar-thumb { background: #000; border: 2px solid #f0f0f0; }
-        ::-webkit-scrollbar-thumb:hover { background: #FFDE00; }
-        
-        @keyframes shake {
-            0%, 100% { transform: translateX(0); }
-            10%, 30%, 50%, 70%, 90% { transform: translateX(-8px); }
-            20%, 40%, 60%, 80% { transform: translateX(8px); }
-        }
-
-        @keyframes float {
-            0%, 100% { transform: translateY(0) rotate(12deg); }
-            50% { transform: translateY(-15px) rotate(15deg); }
-        }
-        
-        .animate-float {
-            animation: float 6s ease-in-out infinite;
+        /* Custom selection */
+        ::selection {
+            background: #E51921;
+            color: #fff;
         }
     </style>
 </head>
 
-<body class="antialiased font-mono relative">
-    <div class="bg-grid-fade"></div>
+<body class="antialiased bg-nlight dark:bg-ndark text-ndark dark:text-nlight font-sans min-h-screen relative overflow-x-hidden">
+    
+    <!-- Background Texture -->
+    <div class="fixed inset-0 bg-dots opacity-60 pointer-events-none z-0"></div>
 
-    <div id="login-overlay" class="fixed inset-0 z-[100] flex items-center justify-center bg-neo-purple p-4 transition-opacity duration-500 ease-in-out">
-        <div class="absolute inset-0 opacity-20" style="background-image: radial-gradient(#000 2px, transparent 2px); background-size: 16px 16px;"></div>
-
-        <div class="card-neo w-full max-w-md p-8 relative z-10 bg-white border-5 transform rotate-1 transition-transform duration-500" id="login-card">
-            <div class="absolute -top-6 -left-6 bg-neo-yellow border-4 border-black px-6 py-2 font-display text-xl uppercase shadow-neo transform -rotate-3">
-                SYSTEM_LOCKED
+    <!-- Header Navigation -->
+    <header class="fixed top-0 left-0 right-0 z-50 bg-nlight/80 dark:bg-ndark/80 backdrop-blur-md border-b border-nlightborder dark:border-ndarkborder transition-colors duration-300">
+        <div class="max-w-7xl mx-auto px-6 h-14 flex justify-between items-center">
+            <div class="flex items-center gap-4 text-xs font-ndot tracking-widest">
+                <span id="os-time">00:00</span>
+                <span class="hidden sm:inline-block text-gray-300 dark:text-gray-700">|</span>
+                <span class="hidden sm:flex items-center gap-1"><i class="ph-fill ph-battery-full text-green-500 text-lg"></i> 100%</span>
+                <span class="hidden sm:flex items-center gap-1"><i class="ph-bold ph-wifi-high text-lg"></i></span>
             </div>
+            
+            <a href="#" class="absolute left-1/2 -translate-x-1/2 flex items-center gap-2 group">
+                <div class="w-6 h-6 rounded-full bg-nred text-white flex items-center justify-center font-ndot text-sm leading-none">R</div>
+                <span class="text-lg font-ndot tracking-widest hidden md:block pt-1">R_OS(1)</span>
+            </a>
 
-            <div id="login-content">
-                <div class="text-center mb-10 mt-4">
-                    <i class="ph-bold ph-lock-key text-6xl mb-4 inline-block"></i>
-                    <h1 class="text-4xl font-display uppercase tracking-tighter leading-none">Identity<br>Verification</h1>
-                </div>
-
-                <form id="login-form" class="space-y-6">
-                    <div>
-                        <label class="block font-bold mb-2 uppercase text-sm bg-black text-white inline-block px-2">User_ID</label>
-                        <input type="text" id="username" class="input-neo" placeholder="ADMIN" required autocomplete="username">
-                    </div>
-
-                    <div class="relative">
-                        <label class="block font-bold mb-2 uppercase text-sm bg-black text-white inline-block px-2">Passcode</label>
-                        <input type="password" id="password" class="input-neo" placeholder="****" required autocomplete="current-password">
-                        <button type="button" id="password-toggle-btn" class="absolute right-4 bottom-4 text-black hover:text-neo-pink transition-colors">
-                            <i id="eye-icon" class="ph-bold ph-eye text-2xl"></i>
-                        </button>
-                    </div>
-
-                    <div id="error-message" class="text-white bg-neo-red font-bold text-center text-sm p-2 min-h-[36px] empty:hidden border-4 border-black shadow-sm flex items-center justify-center uppercase"></div>
-
-                    <button type="submit" class="btn-neo btn-neo-primary w-full text-xl border-4 font-display tracking-wide">
-                        Unlock Protocol
-                    </button>
-                </form>
-
-                <div class="mt-8 text-center text-xs font-bold text-gray-500 uppercase tracking-widest">
-                    Secured by Neo-Brutalism v2.0
-                </div>
-            </div>
-
-            <div id="loading-animation" class="hidden flex flex-col items-center justify-center py-10 fade-in">
-                <div class="relative">
-                    <span class="loader-neo mb-6 w-16 h-16 border-8"></span>
-                </div>
-                <p class="font-display text-2xl uppercase mt-6 text-neo-purple tracking-widest animate-pulse">INITIALIZING SYSTEM...</p>
-            </div>
-        </div>
-    </div>
-
-    <div id="portfolio-view" class="hidden opacity-0 transition-opacity duration-700 ease-in-out">
-        
-        <header class="fixed top-0 left-0 right-0 z-50 bg-white/95 backdrop-blur-sm border-b-4 border-black transition-all duration-300">
-            <div class="max-w-7xl mx-auto px-4 h-24 flex justify-between items-center">
-                <a href="#" class="group flex items-center gap-2">
-                    <div class="w-10 h-10 bg-black text-white flex items-center justify-center border-2 border-transparent group-hover:bg-neo-yellow group-hover:text-black group-hover:border-black transition-colors duration-300">
-                        <span class="font-display text-xl">R</span>
-                    </div>
-                    <span class="text-2xl font-display uppercase tracking-tight hidden sm:block group-hover:text-neo-blue transition-colors duration-300">
-                        Rachit.Dev
-                    </span>
-                </a>
-                
-                <nav class="hidden md:flex items-center space-x-8 font-bold uppercase text-base">
-                    <a href="#about" class="hover:bg-neo-pink hover:text-white px-2 py-1 transition-colors border-2 border-transparent hover:border-black">About</a>
-                    <a href="#projects" class="hover:bg-neo-blue hover:text-white px-2 py-1 transition-colors border-2 border-transparent hover:border-black">Projects</a>
-                    <a href="#contact" class="hover:bg-neo-green hover:text-black px-2 py-1 transition-colors border-2 border-transparent hover:border-black">Contact</a>
-                    <button id="logout-button" class="btn-neo py-2 px-6 text-sm bg-neo-red text-white border-3 shadow-neo-sm hover:shadow-neo hover:bg-red-600 hover:text-white">
-                        LOGOUT
-                    </button>
-                </nav>
-
-                <button class="md:hidden text-4xl p-1 border-2 border-black bg-neo-yellow shadow-neo-sm active:shadow-none active:translate-x-[2px] active:translate-y-[2px]">
-                    <i class="ph-bold ph-list"></i>
+            <div class="flex items-center gap-4">
+                <button id="theme-toggle" class="w-8 h-8 rounded-full flex items-center justify-center bg-gray-200 dark:bg-gray-800 hover:bg-gray-300 dark:hover:bg-gray-700 transition-colors text-lg">
+                    <!-- Icon populated by JS -->
                 </button>
             </div>
-        </header>
+        </div>
+    </header>
 
-        <main class="pt-24">
+    <main class="pt-24 pb-24 px-4 sm:px-6 md:px-8 relative z-10">
+        <div class="max-w-7xl mx-auto space-y-6 sm:space-y-8">
             
-            <section class="min-h-[92vh] flex flex-col justify-center px-4 relative overflow-hidden bg-neo-bg border-b-4 border-black">
-                 <!-- Background Pattern -->
-                <div class="absolute inset-0 z-0 opacity-10" style="background-image: radial-gradient(#000 2px, transparent 2px); background-size: 20px 20px;"></div>
-                <div class="absolute top-20 right-20 w-32 h-32 bg-neo-yellow border-4 border-black rounded-none shadow-neo animate-float z-0 hidden lg:block"></div>
-                <div class="absolute bottom-20 left-10 w-40 h-40 bg-neo-green border-4 border-black rounded-full shadow-neo transform -rotate-6 z-0 hidden lg:block hover:scale-110 transition-transform duration-500"></div>
+            <!-- OS Dock Navigation (Optimized for Mobile) -->
+            <div class="flex justify-center mb-4 sm:mb-8 w-full px-2">
+                <nav class="flex items-center space-x-1 sm:space-x-2 font-ndot text-[10px] sm:text-sm tracking-widest bg-nlightcard/90 dark:bg-ndarkcard/90 backdrop-blur-md p-2 rounded-full border border-nlightborder dark:border-ndarkborder shadow-lg overflow-x-auto hide-scroll max-w-full">
+                    <a href="#about" class="px-4 py-2 sm:py-3 rounded-full hover:bg-gray-200 dark:hover:bg-gray-800 transition-colors flex items-center justify-center gap-2 whitespace-nowrap shrink-0">
+                        <i class="ph-bold ph-user text-nred text-lg sm:text-base"></i> <span class="hidden sm:inline">ABOUT</span>
+                    </a>
+                    <a href="#projects" class="px-4 py-2 sm:py-3 rounded-full hover:bg-gray-200 dark:hover:bg-gray-800 transition-colors flex items-center justify-center gap-2 whitespace-nowrap shrink-0">
+                        <i class="ph-bold ph-app-window text-nred text-lg sm:text-base"></i> <span class="hidden sm:inline">WIDGETS</span>
+                    </a>
+                    <a href="#contact" class="px-4 py-2 sm:py-3 rounded-full hover:bg-gray-200 dark:hover:bg-gray-800 transition-colors flex items-center justify-center gap-2 whitespace-nowrap shrink-0">
+                        <i class="ph-bold ph-paper-plane-tilt text-nred text-lg sm:text-base"></i> <span class="hidden sm:inline">CONNECT</span>
+                    </a>
+                </nav>
+            </div>
 
-                <div class="max-w-7xl mx-auto w-full grid lg:grid-cols-12 gap-8 items-center relative z-10">
+            <!-- 
+                =========================================
+                UNIFIED BENTO MASTER GRID
+                =========================================
+            -->
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6 lg:gap-6 auto-rows-[minmax(160px,auto)]">
                 
-                    <div class="lg:col-span-8 relative">
-                        <!-- Sticker -->
-                        <div class="absolute -top-12 -left-4 md:-left-8 bg-neo-red text-white px-4 py-2 font-display text-sm border-3 border-black transform -rotate-6 shadow-neo z-20 hover:rotate-0 transition-transform duration-300">
-                            V2.0 // SYSTEM ONLINE
-                        </div>
-
-                        <h1 class="font-display leading-[0.8] mb-8 relative z-10 pointer-events-none select-none">
-                            <span class="reveal-on-scroll is-visible block text-[4.5rem] sm:text-[7rem] md:text-[8rem] lg:text-[9rem] tracking-tighter text-black">RACHIT</span>
-                            <span class="reveal-on-scroll is-visible delay-100 block text-[4.5rem] sm:text-[7rem] md:text-[8rem] lg:text-[9rem] tracking-tighter text-white drop-shadow-[4px_4px_0_#000]" style="-webkit-text-stroke: 3px black;">KUMAR</span>
-                            <span class="reveal-on-scroll is-visible delay-200 block text-[4.5rem] sm:text-[7rem] md:text-[8rem] lg:text-[9rem] tracking-tighter text-neo-black pl-2 md:pl-12 bg-neo-yellow inline-block border-4 border-black shadow-neo transform -rotate-1 hover:rotate-1 transition-transform duration-500">MOHANTY</span>
-                        </h1>
-
-                        <div class="reveal-on-scroll is-visible delay-300 bg-white border-4 border-black p-6 shadow-neo-lg max-w-2xl relative hover:shadow-neo transition-shadow duration-300">
-                            <div class="absolute -top-3 -right-3 w-6 h-6 bg-black"></div>
-                            <div class="absolute -bottom-3 -left-3 w-6 h-6 bg-black"></div>
-                            <p class="text-xl md:text-2xl font-mono leading-relaxed font-bold">
-                                Architecting <span class="bg-neo-pink text-white px-1">digital chaos</span> into structured dominance. High-performance web systems & AI integration.
-                            </p>
+                <!-- Hero Text Widget -->
+                <div class="col-span-1 md:col-span-2 lg:col-span-2 lg:row-span-2 bg-nlightcard dark:bg-ndarkcard border border-nlightborder dark:border-ndarkborder rounded-[2rem] sm:rounded-4xl p-6 sm:p-10 relative overflow-hidden widget flex flex-col justify-between h-full min-h-[320px] md:min-h-[400px]">
+                    <div class="absolute -top-10 -right-10 text-[10rem] sm:text-[15rem] font-ndot text-gray-100 dark:text-gray-900 opacity-50 pointer-events-none select-none leading-none">2.0</div>
+                    
+                    <div>
+                        <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-nlightborder dark:border-ndarkborder text-[10px] sm:text-xs font-ndot tracking-widest mb-6 sm:mb-8 bg-nlightcard/50 dark:bg-ndarkcard/50 backdrop-blur-sm z-10 relative">
+                            <span class="w-2 h-2 rounded-full bg-nred animate-pulse"></span>
+                            SYSTEM_ACTIVE
                         </div>
                         
-                        <div class="reveal-on-scroll is-visible delay-300 flex flex-col sm:flex-row gap-4 mt-10">
-                            <a href="#projects" class="btn-neo btn-neo-primary text-xl border-4 hover:bg-neo-green font-display tracking-wide">
-                                <i class="ph-bold ph-arrow-down mr-2"></i> EXPLORE
-                            </a>
-                            <a href="mailto:rachit.mohandev@example.com" class="btn-neo bg-black text-white text-xl border-4 hover:bg-gray-800 font-display tracking-wide">
-                                INITIATE_CONTACT
-                            </a>
-                        </div>
+                        <h1 class="font-ndot text-[clamp(2.5rem,11vw,6rem)] leading-[0.85] tracking-tight mb-4 uppercase relative z-10 break-words">
+                            Rachit<br>Mohanty
+                        </h1>
                     </div>
-                    <div class="lg:col-span-4 relative hidden lg:block h-full min-h-[500px] reveal-on-scroll is-visible delay-200">
-                        <div class="absolute top-10 right-10 w-64 h-80 bg-neo-blue border-4 border-black shadow-neo z-10 transform rotate-6 hover:rotate-12 transition-transform duration-500"></div>
-                    
-                        <div id="hero-image-container" class="absolute top-0 right-20 w-64 h-80 bg-neo-pink border-4 border-black shadow-neo z-20 transform -rotate-3 overflow-hidden group cursor-pointer hover:-translate-y-4 hover:rotate-0 hover:shadow-neo-lg transition-all duration-300">
-                            <div id="upload-prompt" class="absolute inset-0 flex flex-col items-center justify-center text-black opacity-100 transition-all duration-300 z-10 bg-neo-pink">
-                                 <div class="bg-white border-3 border-black p-3 rounded-full mb-3 shadow-neo-sm group-hover:scale-110 transition-transform">
-                                    <i class="ph-bold ph-upload-simple text-3xl"></i>
-                                 </div>
-                                 <span class="font-display text-lg uppercase text-center leading-none">Upload<br>Portrait</span>
-                                 <span class="font-mono text-[10px] mt-2 bg-black text-white px-1">CLICK TO SELECT</span>
-                            </div>
-                            
-                            <img id="hero-image-display" src="" class="absolute inset-0 w-full h-full object-cover hidden bg-white" alt="Hero Portrait">
-                            
-            
-                            <input type="file" id="hero-image-input" accept="image/*" class="hidden">
-                        </div>
 
-                        <div class="absolute top-5 right-14 w-64 h-80 bg-white border-4 border-black shadow-neo-lg z-30 transform rotate-2 flex flex-col justify-between p-6 pointer-events-none">
-                            <div class="flex justify-between items-center">
-                                <i class="ph-bold ph-asterisk text-4xl animate-spin-slow"></i>
-                                <span class="font-bold text-xl font-display">EXP</span>
-                            </div>
-                            <div class="text-center">
-                                <span class="block text-6xl font-display">03</span>
-                                <span class="block text-sm font-bold uppercase mt-2 font-mono">Years of<br>Excellence</span>
-                            </div>
-                            <div class="w-full h-4 bg-black"></div>
-                        </div>
+                    <div class="flex flex-col sm:flex-row justify-between items-start sm:items-end gap-6 relative z-10 mt-auto">
+                        <p class="text-gray-600 dark:text-gray-400 font-sans max-w-xs text-sm sm:text-base leading-relaxed">
+                            Software Engineer designing high-performance digital widgets and complex web systems.
+                        </p>
+                        <a href="#projects" class="inline-flex shrink-0 items-center gap-2 bg-ndark dark:bg-nlight text-nlight dark:text-ndark px-6 py-3 rounded-full font-ndot tracking-widest hover:opacity-80 transition-opacity whitespace-nowrap text-xs sm:text-sm">
+                            EXPLORE_OS <i class="ph-bold ph-arrow-down"></i>
+                        </a>
                     </div>
                 </div>
-            </section>
 
-             
-             <div class="marquee-container border-t-4 border-b-4 border-black">
-                <div class="marquee-content">
-                    /// GENOS AI SYSTEM /// INFLOW AUTOMATION /// TYPESCRIPT /// NEXT.JS /// SUPABASE /// GENOS AI SYSTEM /// INFLOW AUTOMATION /// TYPESCRIPT /// NEXT.JS /// SUPABASE
-                </div>
-            </div>
-            <section id="projects" class="py-32 px-4 bg-white">
-                <div class="max-w-7xl mx-auto">
-                    <div class="flex justify-between items-end mb-20 border-b-4 border-black pb-4 reveal-on-scroll">
-                        <h2 class="text-5xl md:text-7xl font-display uppercase leading-none">
-                            Major<br>Works
-                        </h2>
-                        <span class="hidden md:block text-xl font-bold font-mono">2024 - PRESENT</span>
-                    </div>
-
-                    <div class="space-y-24">
-                        <div class="group relative reveal-on-scroll">
-                            <div class="absolute inset-0 bg-black transform translate-x-4 translate-y-4 border-4 border-black hidden md:block transition-transform duration-300 group-hover:translate-x-6 group-hover:translate-y-6"></div>
-                            
-                            <div class="relative grid lg:grid-cols-2 bg-neo-bg border-4 border-black p-8 gap-10 hover:-translate-y-2 hover:shadow-neo transition-all duration-300 bg-white z-10">
-                                <div class="flex flex-col justify-center order-2 lg:order-1">
-                                    <div class="flex items-center gap-3 mb-4">
-                                        <span class="bg-neo-red text-white px-3 py-1 font-bold border-2 border-black text-xs uppercase">AI Powered</span>
-                                        <span class="bg-black text-white px-3 py-1 font-bold text-xs uppercase">Experimental</span>
-                                    </div>
-                                    <h3 class="text-5xl font-display uppercase mb-4">GENOS</h3>
-                                    <h4 class="text-xl font-bold font-mono text-neo-purple mb-6 uppercase">The Real-Time Manifestation of Jarvis</h4>
-                                    
-                                    <p class="font-mono text-base mb-8 border-l-4 border-black pl-4 leading-relaxed">
-                                        An advanced voice-activated assistant capable of real-time system control, code generation, and conversational context retention. Built with the latest LLM APIs and WebSocket streams for zero-latency interaction.
-                                    </p>
-                                    
-                                    <div class="flex flex-wrap gap-3 mb-8">
-                                        <span class="border-2 border-black px-3 py-1 font-bold text-sm bg-neo-yellow shadow-neo-sm hover:shadow-none transition-shadow cursor-default">Python</span>
-                                        <span class="border-2 border-black px-3 py-1 font-bold text-sm bg-neo-yellow shadow-neo-sm hover:shadow-none transition-shadow cursor-default">OpenAI</span>
-                                        <span class="border-2 border-black px-3 py-1 font-bold text-sm bg-neo-yellow shadow-neo-sm hover:shadow-none transition-shadow cursor-default">React</span>
-                                        <span class="border-2 border-black px-3 py-1 font-bold text-sm bg-neo-yellow shadow-neo-sm hover:shadow-none transition-shadow cursor-default">WebSockets</span>
-                                    </div>
-
-                                    <div class="flex gap-4">
-                                        <button class="btn-neo btn-neo-secondary text-sm px-6 py-3">View Blueprint</button>
-                                        <button class="btn-neo bg-white text-sm px-6 py-3">Live Demo</button>
-                                    </div>
-                                </div>
-
-                                <!-- Visual -->
-                                <div class="order-1 lg:order-2 border-4 border-black bg-black min-h-[300px] flex items-center justify-center relative overflow-hidden group-hover:bg-gray-900 transition-colors duration-500">
-                                    <div class="absolute inset-0 opacity-30" style="background-image: linear-gradient(0deg, transparent 24%, #00FF7F 25%, #00FF7F 26%, transparent 27%, transparent 74%, #00FF7F 75%, #00FF7F 76%, transparent 77%, transparent), linear-gradient(90deg, transparent 24%, #00FF7F 25%, #00FF7F 26%, transparent 27%, transparent 74%, #00FF7F 75%, #00FF7F 76%, transparent 77%, transparent); background-size: 50px 50px;"></div>
-                                    <i class="ph-fill ph-brain text-9xl text-neo-green animate-pulse"></i>
-                                    <div class="absolute bottom-4 right-4 text-neo-green font-mono text-xs">SYSTEM_ONLINE</div>
-                                </div>
-                            </div>
+                <!-- Portrait Upload Widget -->
+                <div class="col-span-1 md:col-span-2 lg:col-span-1 lg:row-span-2 bg-nlightcard dark:bg-ndarkcard border border-nlightborder dark:border-ndarkborder rounded-[2rem] sm:rounded-4xl p-4 relative flex flex-col items-center justify-center widget group h-full min-h-[250px] md:min-h-[300px]" id="hero-image-container">
+                    <div class="w-full h-full border-2 border-dashed border-gray-300 dark:border-gray-700 rounded-[1.5rem] sm:rounded-3xl flex flex-col items-center justify-center cursor-pointer relative overflow-hidden transition-colors hover:border-nred dark:hover:border-nred">
+                        <div id="upload-prompt" class="flex flex-col items-center gap-3 sm:gap-4 text-gray-500 dark:text-gray-400 group-hover:text-nred transition-colors z-10 p-4">
+                            <i class="ph-bold ph-user-circle text-5xl sm:text-6xl"></i>
+                            <span class="font-ndot tracking-widest text-[10px] sm:text-xs uppercase text-center px-2">Tap_To_Set_User</span>
                         </div>
-                        <div class="group relative reveal-on-scroll">
-                            <div class="absolute inset-0 bg-neo-yellow transform -translate-x-4 translate-y-4 border-4 border-black hidden md:block transition-transform duration-300 group-hover:-translate-x-6 group-hover:translate-y-6"></div>
-                            
-                            <div class="relative grid lg:grid-cols-2 bg-white border-4 border-black p-8 gap-10 hover:-translate-y-2 hover:shadow-neo transition-all duration-300 z-10">
-                                <div class="border-4 border-black bg-neo-blue min-h-[300px] flex items-center justify-center relative overflow-hidden">
-                                    <div class="absolute inset-0 flex flex-col items-center justify-center opacity-20 transform rotate-12 scale-150">
-                                        <div class="w-full h-4 bg-white mb-8"></div>
-                                        <div class="w-full h-4 bg-white mb-8"></div>
-                                        <div class="w-full h-4 bg-white mb-8"></div>
-                                    </div>
-                                    <i class="ph-bold ph-receipt text-9xl text-white drop-shadow-[4px_4px_0px_#000] group-hover:scale-110 transition-transform duration-300"></i>
-                                </div>
-
-        
-                                <div class="flex flex-col justify-center">
-                                    <div class="flex items-center gap-3 mb-4">
-                                        <span class="bg-neo-green text-black px-3 py-1 font-bold border-2 border-black text-xs uppercase">SaaS</span>
-                                        <span class="bg-black text-white px-3 py-1 font-bold text-xs uppercase">Productivity</span>
-                                    </div>
-                                    <h3 class="text-5xl font-display uppercase mb-4">INFLOW</h3>
-                                    <h4 class="text-xl font-bold font-mono text-neo-blue mb-6 uppercase">Automated Invoicing for Pros</h4>
-                                    
-                                    <p class="font-mono text-base mb-8 border-l-4 border-black pl-4 leading-relaxed">
-                                        A comprehensive financial tool designed for freelancers and small businesses. Generates compliant PDF invoices, tracks payments via Stripe, and provides visual analytics of monthly cash flow.
-                                    </p>
-                                    
-                                    <div class="flex flex-wrap gap-3 mb-8">
-                                        <span class="border-2 border-black px-3 py-1 font-bold text-sm bg-neo-pink text-white shadow-neo-sm">Next.js</span>
-                                        <span class="border-2 border-black px-3 py-1 font-bold text-sm bg-neo-pink text-white shadow-neo-sm">Stripe</span>
-                                        <span class="border-2 border-black px-3 py-1 font-bold text-sm bg-neo-pink text-white shadow-neo-sm">PostgreSQL</span>
-                                        <span class="border-2 border-black px-3 py-1 font-bold text-sm bg-neo-pink text-white shadow-neo-sm">Tailwind</span>
-                                    </div>
-
-                                    <div class="flex gap-4">
-                                        <button class="btn-neo btn-neo-secondary text-sm px-6 py-3">View Dashboard</button>
-                                        <button class="btn-neo bg-white text-sm px-6 py-3">Github Repo</button>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
+                        <img id="hero-image-display" src="" class="absolute inset-0 w-full h-full object-cover hidden z-20" alt="User Portrait">
+                        <input type="file" id="hero-image-input" accept="image/*" class="hidden">
                     </div>
                 </div>
-            </section>
 
-            <section id="about" class="py-24 px-4 bg-neo-bg border-t-4 border-black reveal-on-scroll">
-                <div class="max-w-7xl mx-auto">
-                    <div class="grid grid-cols-1 md:grid-cols-4 gap-6">
-                        <div class="md:col-span-2 card-neo p-8 bg-black text-white flex flex-col justify-between min-h-[250px] group hover:bg-gray-900 transition-colors">
-                            <i class="ph-bold ph-strategy text-5xl text-neo-yellow mb-4 group-hover:rotate-12 transition-transform duration-300"></i>
-                            <div>
-                                <h3 class="text-3xl font-display uppercase mb-2">Philosophy</h3>
-                                <p class="font-mono text-sm text-gray-300">"Efficiency is the byproduct of clarity." I build systems that cut through the noise, delivering raw performance and intuitive control.</p>
-                            </div>
-                        </div>
-
-                        <div class="card-neo p-6 bg-neo-pink flex flex-col items-center justify-center text-center group">
-                            <span class="text-6xl font-display text-white text-outline group-hover:scale-110 transition-transform duration-300">3+</span>
-                            <span class="font-bold uppercase mt-2 border-2 border-black bg-white px-2 shadow-neo-sm">Years Building</span>
-                        </div>
-
-                        <div class="card-neo p-6 bg-neo-green flex flex-col items-center justify-center text-center group">
-                            <span class="text-6xl font-display text-black group-hover:scale-110 transition-transform duration-300">150+</span>
-                            <span class="font-bold uppercase mt-2 border-2 border-black bg-white px-2 shadow-neo-sm">Commits/Mo</span>
-                        </div>
-                    </div>
+                <!-- Stat 1 (Years) -->
+                <div class="col-span-1 md:col-span-1 lg:col-span-1 bg-nlightcard dark:bg-ndarkcard border border-nlightborder dark:border-ndarkborder rounded-[2rem] sm:rounded-4xl p-6 flex flex-col items-center justify-center text-center widget h-full min-h-[160px] md:min-h-[180px]">
+                    <span class="text-5xl lg:text-6xl font-ndot text-nred mb-2">03</span>
+                    <span class="font-sans text-[10px] sm:text-xs text-gray-500 font-medium uppercase tracking-wider">Years Built</span>
                 </div>
-            </section>
-
-           
-            <section id="contact" class="py-24 px-4 bg-neo-yellow border-t-4 border-black text-center relative overflow-hidden reveal-on-scroll">
-                <div class="absolute inset-0 opacity-10" style="background-image: repeating-linear-gradient(45deg, #000 0, #000 10px, transparent 10px, transparent 20px);"></div>
                 
-                <div class="relative z-10 max-w-4xl mx-auto bg-white border-5 border-black p-12 shadow-neo-lg transform rotate-1 hover:rotate-0 transition-transform duration-500">
-                    <h2 class="text-5xl md:text-7xl font-display uppercase mb-6 leading-none">Let's Build<br>Something <span class="text-neo-red">Crazy</span></h2>
-                    <p class="font-mono mb-10 text-xl font-bold">No lengthy forms. Just direct communication.</p>
+                <!-- Stat 2 (Commits) -->
+                <div class="col-span-1 md:col-span-1 lg:col-span-1 bg-nlightcard dark:bg-ndarkcard border border-nlightborder dark:border-ndarkborder rounded-[2rem] sm:rounded-4xl p-6 flex flex-col items-center justify-center text-center widget h-full min-h-[160px] md:min-h-[180px]">
+                    <span class="text-5xl lg:text-6xl font-ndot text-ndark dark:text-nlight mb-2">150</span>
+                    <span class="font-sans text-[10px] sm:text-xs text-gray-500 font-medium uppercase tracking-wider">Commits / Mo</span>
+                </div>
+
+                <!-- Full Width Marquee -->
+                <div class="col-span-1 md:col-span-2 lg:col-span-4 bg-nred rounded-full py-3 sm:py-4 text-white marquee-container shadow-lg widget overflow-hidden">
+                    <div class="marquee-content font-ndot tracking-[0.2em] text-xs sm:text-lg uppercase flex items-center h-full">
+                        <span class="mx-3 sm:mx-4 text-lg sm:text-2xl">•</span><span>SOFTWARE ARCHITECTURE</span>
+                        <span class="mx-3 sm:mx-4 text-lg sm:text-2xl">•</span><span>UI/UX DESIGN</span>
+                        <span class="mx-3 sm:mx-4 text-lg sm:text-2xl">•</span><span>FULL-STACK WIDGETS</span>
+                        <span class="mx-3 sm:mx-4 text-lg sm:text-2xl">•</span><span>NOTHING OS AESTHETIC</span>
+                        <span class="mx-3 sm:mx-4 text-lg sm:text-2xl">•</span><span>SOFTWARE ARCHITECTURE</span>
+                        <span class="mx-3 sm:mx-4 text-lg sm:text-2xl">•</span><span>UI/UX DESIGN</span>
+                        <span class="mx-3 sm:mx-4 text-lg sm:text-2xl">•</span><span>FULL-STACK WIDGETS</span>
+                        <span class="mx-3 sm:mx-4 text-lg sm:text-2xl">•</span><span>NOTHING OS AESTHETIC</span>
+                    </div>
+                </div>
+
+                <!-- Projects Header -->
+                <div id="projects" class="col-span-1 md:col-span-2 lg:col-span-4 flex items-end pt-6 sm:pt-8 pb-2">
+                    <h2 class="text-2xl sm:text-3xl font-ndot tracking-widest uppercase text-ndark dark:text-nlight border-b border-nlightborder dark:border-ndarkborder w-full pb-2">Installed_Widgets</h2>
+                </div>
+
+                <!-- ExpFlow Widget -->
+                <div class="col-span-1 md:col-span-2 lg:col-span-2 bg-nlightcard dark:bg-ndarkcard border border-nlightborder dark:border-ndarkborder rounded-[2rem] sm:rounded-4xl overflow-hidden widget flex flex-col h-full">
+                    <div class="p-6 sm:p-8 pb-0 flex-grow">
+                        <div class="flex items-center justify-between mb-4 sm:mb-6">
+                            <h3 class="text-3xl sm:text-4xl font-ndot uppercase tracking-wider text-ndark dark:text-nlight">ExpFlow</h3>
+                            <div class="w-10 h-10 sm:w-12 sm:h-12 rounded-full border border-nlightborder dark:border-ndarkborder flex items-center justify-center text-expflow bg-[#3E3C38] shrink-0">
+                                <i class="ph-bold ph-chart-polar text-xl sm:text-2xl"></i>
+                            </div>
+                        </div>
+                        <p class="text-gray-600 dark:text-gray-400 font-sans text-xs sm:text-sm md:text-base mb-6">
+                            Master your finances through immersive 3D visualization, advanced analytics, and strategic budgeting. High-performance client-side environment.
+                        </p>
+                        <div class="flex flex-wrap gap-2 font-ndot text-[10px] sm:text-xs tracking-widest uppercase mb-6 sm:mb-8">
+                            <span class="px-2 sm:px-3 py-1 rounded-full border border-gray-300 dark:border-gray-700">Three.js</span>
+                            <span class="px-2 sm:px-3 py-1 rounded-full border border-gray-300 dark:border-gray-700">Unity WebGL</span>
+                        </div>
+                    </div>
+
+                    <div class="mt-auto relative bg-[#3E3C38] h-36 sm:h-48 border-t border-nlightborder dark:border-ndarkborder p-4 sm:p-6 overflow-hidden flex flex-col justify-between shrink-0">
+                        <div class="absolute inset-0 opacity-10" style="background-image: radial-gradient(#D3EA5C 2px, transparent 2px); background-size: 16px 16px;"></div>
+                        <div class="relative z-10 flex justify-between items-start">
+                             <div class="bg-black/50 backdrop-blur-sm border border-gray-700 text-white rounded-lg sm:rounded-xl px-3 py-1.5 font-ndot text-[10px] sm:text-sm flex items-center gap-2">
+                                <span class="w-2 h-2 bg-expflow rounded-full"></span> US$ 0.00
+                             </div>
+                             <div class="bg-expflow text-black rounded-lg sm:rounded-xl px-3 py-1.5 font-ndot text-[10px] sm:text-sm font-bold flex items-center gap-2 shadow-sm">
+                                <i class="ph-bold ph-cloud-check"></i> Synced
+                             </div>
+                        </div>
+                        <div class="relative z-10 flex w-full">
+                            <a href="https://expflow.vercel.app/" target="_blank" class="w-full bg-white text-black text-center py-2.5 sm:py-3 rounded-xl sm:rounded-2xl font-ndot uppercase tracking-widest text-[10px] sm:text-sm hover:bg-expflow transition-colors">
+                                Launch_App
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- CineFlow Widget -->
+                <div class="col-span-1 md:col-span-2 lg:col-span-2 bg-nlightcard dark:bg-ndarkcard border border-nlightborder dark:border-ndarkborder rounded-[2rem] sm:rounded-4xl overflow-hidden widget flex flex-col h-full">
+                    <div class="p-6 sm:p-8 pb-0 flex-grow">
+                        <div class="flex items-center justify-between mb-4 sm:mb-6">
+                            <h3 class="text-3xl sm:text-4xl font-ndot uppercase tracking-wider text-ndark dark:text-nlight">CineFlow</h3>
+                            <div class="w-10 h-10 sm:w-12 sm:h-12 rounded-full border border-nlightborder dark:border-ndarkborder flex items-center justify-center text-white bg-cineflow shrink-0">
+                                <i class="ph-bold ph-film-strip text-xl sm:text-2xl"></i>
+                            </div>
+                        </div>
+                        <p class="text-gray-600 dark:text-gray-400 font-sans text-xs sm:text-sm md:text-base mb-6">
+                            Discover cinema. Anywhere. Anytime. Curated movie collections tailored to your mood - whether it's thriller, romance, or sci-fi.
+                        </p>
+                        <div class="flex flex-wrap gap-2 font-ndot text-[10px] sm:text-xs tracking-widest uppercase mb-6 sm:mb-8">
+                            <span class="px-2 sm:px-3 py-1 rounded-full border border-gray-300 dark:border-gray-700">React</span>
+                            <span class="px-2 sm:px-3 py-1 rounded-full border border-gray-300 dark:border-gray-700">TMDB API</span>
+                        </div>
+                    </div>
+
+                    <div class="mt-auto relative bg-[#0D1712] h-36 sm:h-48 border-t border-nlightborder dark:border-ndarkborder p-4 sm:p-6 overflow-hidden flex flex-col justify-between shrink-0" style="background-image: radial-gradient(circle at top right, rgba(73, 160, 120, 0.3) 0%, transparent 60%);">
+                         <div class="absolute inset-x-0 bottom-[-15px] flex justify-center gap-2 sm:gap-3 opacity-60 pointer-events-none">
+                            <div class="w-10 sm:w-16 h-16 sm:h-24 bg-gray-800 rounded-md border border-gray-700/50 transform -translate-y-2"></div>
+                            <div class="w-10 sm:w-16 h-20 sm:h-28 bg-gray-700 rounded-md border border-gray-600/50 transform -translate-y-4"></div>
+                            <div class="w-10 sm:w-16 h-20 sm:h-28 bg-gray-700 rounded-md border border-gray-600/50 transform -translate-y-5"></div>
+                            <div class="w-10 sm:w-16 h-16 sm:h-24 bg-gray-800 rounded-md border border-gray-700/50 transform -translate-y-3"></div>
+                        </div>
+                        <div class="relative z-10">
+                            <div class="bg-black/50 backdrop-blur-sm text-white border border-white/10 rounded-lg sm:rounded-xl px-3 py-1.5 font-ndot text-[10px] sm:text-sm inline-block shadow-sm">
+                                Curated_Collections
+                            </div>
+                        </div>
+                        <div class="relative z-10 flex w-full mt-auto">
+                            <a href="https://cine-flow-pearl.vercel.app/" target="_blank" class="w-full bg-cineflow text-white text-center py-2.5 sm:py-3 rounded-xl sm:rounded-2xl font-ndot uppercase tracking-widest text-[10px] sm:text-sm hover:opacity-80 transition-opacity flex items-center justify-center gap-2">
+                                Start Exploring <i class="ph-bold ph-arrow-right"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Atomix WX Widget -->
+                <div class="col-span-1 md:col-span-2 lg:col-span-4 bg-nlightcard dark:bg-ndarkcard border border-nlightborder dark:border-ndarkborder rounded-[2rem] sm:rounded-4xl overflow-hidden widget flex flex-col lg:flex-row h-full">
+                    <div class="p-6 sm:p-8 lg:p-10 lg:w-1/2 flex flex-col justify-center">
+                        <div class="flex items-center justify-between mb-4 sm:mb-6">
+                            <h3 class="text-3xl sm:text-4xl font-ndot uppercase tracking-wider text-ndark dark:text-nlight">Atomix WX</h3>
+                            <div class="w-10 h-10 sm:w-12 sm:h-12 rounded-full border border-nlightborder dark:border-ndarkborder flex items-center justify-center text-white bg-[#0A0F18] shrink-0">
+                                <i class="ph-bold ph-lightning text-atomix text-xl sm:text-2xl"></i>
+                            </div>
+                        </div>
+                        <p class="text-gray-600 dark:text-gray-400 font-sans text-xs sm:text-sm md:text-base mb-6">
+                            Lighting up the future. Get in touch with your atmosphere using our lightning-fast, shader-accelerated nano forecasts and real-time planetary data integration.
+                        </p>
+                        <div class="flex flex-wrap gap-2 font-ndot text-[10px] sm:text-xs tracking-widest uppercase lg:mb-0">
+                            <span class="px-2 sm:px-3 py-1 rounded-full border border-gray-300 dark:border-gray-700">WebGL Shaders</span>
+                            <span class="px-2 sm:px-3 py-1 rounded-full border border-gray-300 dark:border-gray-700">Live Satellites</span>
+                        </div>
+                    </div>
+
+                    <div class="relative bg-[#050A14] min-h-[200px] sm:min-h-[250px] lg:w-1/2 border-t lg:border-t-0 lg:border-l border-nlightborder dark:border-ndarkborder p-6 sm:p-8 overflow-hidden flex flex-col justify-between shrink-0">
+                        <div class="absolute inset-0 flex items-center justify-center opacity-60 overflow-hidden pointer-events-none">
+                            <div class="w-[150%] h-[2px] bg-atomix/50 transform -rotate-12 shadow-[0_0_20px_4px_rgba(0,212,255,0.4)]"></div>
+                            <div class="absolute w-32 h-32 sm:w-40 sm:h-40 bg-atomix/20 rounded-full blur-[40px]"></div>
+                        </div>
+                        <div class="relative z-10 flex justify-end">
+                            <div class="bg-black/60 backdrop-blur-md text-white border border-atomix/30 rounded-lg sm:rounded-xl px-3 py-1.5 font-ndot text-[10px] sm:text-sm inline-flex items-center gap-2 shadow-sm">
+                                <span class="w-2 h-2 rounded-full bg-atomix animate-pulse"></span>
+                                Global_Node_Access
+                            </div>
+                        </div>
+                        <div class="relative z-10 flex w-full mt-auto">
+                            <a href="https://atomix-wx.vercel.app/" target="_blank" class="w-full bg-white text-black text-center py-3 sm:py-4 rounded-xl sm:rounded-2xl font-ndot uppercase tracking-widest text-[10px] sm:text-sm hover:bg-atomix hover:text-black transition-all shadow-[0_0_15px_rgba(0,212,255,0.2)]">
+                                Initialize Interface
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Philosophy Widget -->
+                <div id="about" class="col-span-1 md:col-span-1 lg:col-span-2 bg-nlightcard dark:bg-ndarkcard border border-nlightborder dark:border-ndarkborder rounded-[2rem] sm:rounded-4xl p-6 sm:p-10 flex flex-col justify-center widget relative overflow-hidden h-full min-h-[220px] sm:min-h-[250px]">
+                    <div class="absolute top-4 sm:top-6 right-4 sm:right-6 flex items-center gap-2 z-10">
+                        <span class="w-2 h-2 rounded-full bg-gray-300 dark:bg-gray-600 group-hover:bg-nred transition-colors animate-pulse"></span>
+                        <span class="font-ndot text-[10px] text-gray-400 uppercase tracking-widest hidden sm:inline">Diagnostic_Log</span>
+                    </div>
+                    <i class="ph-fill ph-quotes text-6xl sm:text-8xl absolute -bottom-4 -left-4 text-nlightborder dark:text-ndarkborder z-0 transition-transform duration-500 group-hover:-translate-y-2"></i>
                     
-                    <a href="mailto:rachit.mohandev@example.com" class="btn-neo btn-neo-primary text-2xl px-12 py-6 hover:bg-black hover:text-white border-4 font-display">
-                        rachit.mohandev@example.com
+                    <div class="relative z-10">
+                        <h4 class="text-[10px] sm:text-sm font-ndot text-nred tracking-widest uppercase mb-3 sm:mb-4">Core_Philosophy</h4>
+                        <p class="font-sans text-sm sm:text-lg text-ndark dark:text-nlight leading-relaxed">
+                            "Efficiency is the byproduct of clarity." I build systems that cut through the noise, delivering raw performance and intuitive control.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Contact Widget -->
+                <div id="contact" class="col-span-1 md:col-span-1 lg:col-span-2 bg-nlightcard dark:bg-ndarkcard border border-nlightborder dark:border-ndarkborder rounded-[2rem] sm:rounded-4xl p-6 sm:p-10 text-center widget relative overflow-hidden flex flex-col items-center justify-center h-full min-h-[220px] sm:min-h-[250px]">
+                    <div class="absolute w-40 h-40 sm:w-64 sm:h-64 bg-nred/10 rounded-full blur-3xl -top-10 -right-10 pointer-events-none"></div>
+                    <div class="absolute w-40 h-40 sm:w-64 sm:h-64 bg-blue-500/10 rounded-full blur-3xl -bottom-10 -left-10 pointer-events-none"></div>
+                    
+                    <h2 class="text-3xl sm:text-5xl font-ndot uppercase mb-3 sm:mb-4 relative z-10 text-ndark dark:text-nlight break-words w-full">Initiate_Comm</h2>
+                    <p class="font-sans text-[10px] sm:text-sm text-gray-500 dark:text-gray-400 mb-6 sm:mb-8 relative z-10">Open for new architectural challenges.</p>
+                    
+                    <a href="mailto:divinecoder04@gmail.com" class="inline-flex items-center justify-center px-4 sm:px-6 py-3 sm:py-4 bg-nred text-white rounded-full font-ndot tracking-widest text-[clamp(0.6rem,3.5vw,0.875rem)] hover:bg-red-700 transition-colors relative z-10 mb-6 sm:mb-8 w-full max-w-[280px] sm:max-w-md break-all sm:break-normal">
+                        divinecoder04@gmail.com
                     </a>
 
-                    <div class="mt-16 flex justify-center gap-8">
-                        <a href="#" class="w-16 h-16 bg-black text-white flex items-center justify-center border-4 border-transparent hover:bg-white hover:text-black hover:border-black transition-all shadow-neo hover:shadow-none hover:-translate-y-2">
-                            <i class="ph-bold ph-github-logo text-3xl"></i>
+                    <div class="flex justify-center gap-3 sm:gap-4 relative z-10">
+                        <a href="https://github.com/Rachit-Mohanty" target="_blank" rel="noopener noreferrer" class="w-10 h-10 sm:w-12 sm:h-12 rounded-full border border-nlightborder dark:border-ndarkborder flex items-center justify-center text-ndark dark:text-nlight hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors">
+                            <i class="ph-bold ph-github-logo text-xl sm:text-2xl"></i>
                         </a>
-                        <a href="#" class="w-16 h-16 bg-neo-blue text-white flex items-center justify-center border-4 border-black hover:bg-white hover:text-neo-blue transition-all shadow-neo hover:shadow-none hover:-translate-y-2">
-                            <i class="ph-bold ph-linkedin-logo text-3xl"></i>
+                        <a href="#" class="w-10 h-10 sm:w-12 sm:h-12 rounded-full border border-nlightborder dark:border-ndarkborder flex items-center justify-center text-ndark dark:text-nlight hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors">
+                            <i class="ph-bold ph-linkedin-logo text-xl sm:text-2xl"></i>
                         </a>
-                        <a href="#" class="w-16 h-16 bg-neo-pink text-white flex items-center justify-center border-4 border-black hover:bg-white hover:text-neo-pink transition-all shadow-neo hover:shadow-none hover:-translate-y-2">
-                            <i class="ph-bold ph-twitter-logo text-3xl"></i>
+                        <a href="#" class="w-10 h-10 sm:w-12 sm:h-12 rounded-full border border-nlightborder dark:border-ndarkborder flex items-center justify-center text-ndark dark:text-nlight hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors">
+                            <i class="ph-bold ph-twitter-logo text-xl sm:text-2xl"></i>
                         </a>
                     </div>
                 </div>
-            </section>
-        </main>
 
-        <footer class="bg-black text-white py-12 border-t-4 border-white reveal-on-scroll">
-            <div class="max-w-7xl mx-auto px-4 flex flex-col md:flex-row justify-between items-center text-center md:text-left gap-6">
-                <div class="font-mono text-sm">
-                    &copy; 2026 RACHIT KUMAR MOHANTY.<br>
-                    <span class="text-neo-yellow font-bold">ALL SYSTEMS OPERATIONAL.</span>
-                </div>
-                <div class="flex gap-8 font-black uppercase text-lg tracking-widest font-display">
-                    <a href="#" class="hover:text-neo-green hover:underline decoration-4 decoration-neo-green underline-offset-4 transition-colors">Github</a>
-                    <a href="#" class="hover:text-neo-pink hover:underline decoration-4 decoration-neo-pink underline-offset-4 transition-colors">LinkedIn</a>
-                    <a href="#" class="hover:text-neo-blue hover:underline decoration-4 decoration-neo-blue underline-offset-4 transition-colors">Email</a>
-                </div>
+            </div> <!-- END UNIFIED BENTO GRID -->
+        </div>
+    </main>
+
+    <!-- Minimal Footer -->
+    <footer class="border-t border-nlightborder dark:border-ndarkborder bg-nlight/80 dark:bg-ndark/80 backdrop-blur-md relative z-10">
+        <div class="max-w-7xl mx-auto px-6 py-8 flex flex-col md:flex-row justify-between items-center gap-4">
+            <div class="font-ndot text-sm text-gray-500 tracking-widest uppercase">
+                &copy; 2026 R_OS. ALL_RIGHTS_RESERVED.
             </div>
-        </footer>
-    </div>
+            <div class="font-ndot text-xs px-3 py-1 bg-green-500/10 text-green-600 dark:text-green-400 rounded-full flex items-center gap-2 tracking-widest">
+                <span class="w-1.5 h-1.5 rounded-full bg-green-500"></span>
+                SYSTEM_ONLINE
+            </div>
+        </div>
+    </footer>
 
     <script>
         document.addEventListener('DOMContentLoaded', () => {
-            // Elements
-            const loginOverlay = document.getElementById('login-overlay');
-            const loginCard = document.getElementById('login-card');
-            const loginContent = document.getElementById('login-content');
-            const loadingAnimation = document.getElementById('loading-animation');
-            const portfolioView = document.getElementById('portfolio-view');
-            const loginForm = document.getElementById('login-form');
-            const errorMessage = document.getElementById('error-message');
-            const passwordInput = document.getElementById('password');
-            const passwordToggleBtn = document.getElementById('password-toggle-btn');
-            const eyeIcon = document.getElementById('eye-icon');
-            const logoutButton = document.getElementById('logout-button');
+            // OS Clock Logic
+            const timeDisplay = document.getElementById('os-time');
+            if (timeDisplay) {
+                const updateTime = () => {
+                    const now = new Date();
+                    timeDisplay.textContent = now.toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'});
+                };
+                updateTime(); // initial call
+                setInterval(updateTime, 1000);
+            }
 
+            // Theme Toggle Logic
+            const themeToggleBtn = document.getElementById('theme-toggle');
+            const htmlElement = document.documentElement;
+
+            // Check saved theme or system preference
+            if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+                htmlElement.classList.add('dark');
+            } else {
+                htmlElement.classList.remove('dark');
+            }
+
+            const updateIcon = () => {
+                const isDark = htmlElement.classList.contains('dark');
+                themeToggleBtn.innerHTML = isDark 
+                    ? '<i class="ph-bold ph-sun text-gray-300"></i>' 
+                    : '<i class="ph-bold ph-moon text-gray-700"></i>';
+            };
+            
+            updateIcon();
+
+            themeToggleBtn.addEventListener('click', () => {
+                htmlElement.classList.toggle('dark');
+                if (htmlElement.classList.contains('dark')) {
+                    localStorage.theme = 'dark';
+                } else {
+                    localStorage.theme = 'light';
+                }
+                updateIcon();
+            });
+
+            // Portrait Upload Logic
             const heroImageContainer = document.getElementById('hero-image-container');
             const heroImageInput = document.getElementById('hero-image-input');
             const heroImageDisplay = document.getElementById('hero-image-display');
             const uploadPrompt = document.getElementById('upload-prompt');
-
-            const CORRECT_USERNAME_B64 = 'cmFjaGl0IGt1bWFyIG1vaGFudHk=';
-            const CORRECT_PASSWORD_B64 = 'bG9wYS0yNA==';
-
-            const observerOptions = {
-                threshold: 0.1,
-                rootMargin: "0px 0px -50px 0px"
-            };
-
-            const observer = new IntersectionObserver((entries) => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        entry.target.classList.add('is-visible');
-                        observer.unobserve(entry.target); // Only animate once
-                    }
-                });
-            }, observerOptions);
-
-            document.querySelectorAll('.reveal-on-scroll').forEach(el => observer.observe(el));
-
-            passwordToggleBtn.addEventListener('click', () => {
-                const isPassword = passwordInput.type === 'password';
-                passwordInput.type = isPassword ? 'text' : 'password';
-                
-                if(isPassword) {
-                    eyeIcon.classList.remove('ph-eye');
-                    eyeIcon.classList.add('ph-eye-slash');
-                } else {
-                    eyeIcon.classList.remove('ph-eye-slash');
-                    eyeIcon.classList.add('ph-eye');
-                }
-            });
-
-            loginForm.addEventListener('submit', (e) => {
-                e.preventDefault();
-                const username = document.getElementById('username').value.trim().toLowerCase();
-                const password = document.getElementById('password').value.trim();
-
-                if (btoa(username) === CORRECT_USERNAME_B64 && btoa(password) === CORRECT_PASSWORD_B64) {
-                    // Success UI - Smooth Transition
-                    errorMessage.textContent = '';
-                    loginContent.classList.add('hidden');
-                    loadingAnimation.classList.remove('hidden');
-                    loginCard.style.transform = "scale(1.05)"; // Pulse effect
-
-                    setTimeout(() => {
-                        loginOverlay.style.opacity = '0';
-                        loginOverlay.style.pointerEvents = 'none'; // Prevent clicks while fading
-                        
-                        portfolioView.classList.remove('hidden');
-                        void portfolioView.offsetWidth; 
-                        portfolioView.style.opacity = '1';
-                        
-                        window.scrollTo(0, 0);
-
-                        setTimeout(() => {
-                            loginOverlay.style.display = 'none';
-                        }, 500);
-
-                    }, 2000);
-                } else {
-                    errorMessage.textContent = 'ACCESS DENIED';
-                    loginForm.parentElement.classList.add('animate-[shake_0.4s_ease-in-out]');
-                    setTimeout(() => loginForm.parentElement.classList.remove('animate-[shake_0.4s_ease-in-out]'), 400);
-                }
-            });
-
-            logoutButton.addEventListener('click', (e) => {
-                e.preventDefault();
-                
-                portfolioView.style.opacity = '0';
-                
-                setTimeout(() => {
-                    portfolioView.classList.add('hidden');
-                    
-                    loginOverlay.style.display = 'flex';
-                    void loginOverlay.offsetWidth;
-                    loginOverlay.style.opacity = '1';
-                    loginOverlay.style.pointerEvents = 'auto';
-                    
-                    loadingAnimation.classList.add('hidden');
-                    loginContent.classList.remove('hidden');
-                    
-                    loginCard.style.transform = "";
-
-                    document.getElementById('username').value = '';
-                    document.getElementById('password').value = '';
-                    errorMessage.textContent = '';
-                }, 500);
-            });
 
             heroImageContainer.addEventListener('click', () => {
                 heroImageInput.click();
@@ -651,10 +448,10 @@
                         heroImageDisplay.src = e.target.result;
                         heroImageDisplay.classList.remove('hidden');
     
-                        uploadPrompt.className = "absolute inset-0 flex flex-col items-center justify-center bg-black/60 opacity-0 group-hover:opacity-100 transition-opacity duration-200 z-10 text-white";
+                        uploadPrompt.className = "absolute inset-0 flex flex-col items-center justify-center bg-black/60 opacity-0 group-hover:opacity-100 transition-opacity duration-200 z-30 text-white rounded-3xl";
                         uploadPrompt.innerHTML = `
                             <i class="ph-bold ph-arrows-clockwise text-4xl mb-2"></i>
-                            <span class="font-display text-sm uppercase">Change</span>
+                            <span class="font-ndot text-xs tracking-widest uppercase">Change_User</span>
                         `;
                     }
                     reader.readAsDataURL(file);
@@ -662,16 +459,5 @@
             });
         });
     </script>
-    <style>
-        @keyframes shake {
-            0%, 100% { transform: translateX(0); }
-            10%, 30%, 50%, 70%, 90% { transform: translateX(-8px); }
-            20%, 40%, 60%, 80% { transform: translateX(8px); }
-        }
-        @keyframes spin-slow {
-            from { transform: rotate(0deg); }
-            to { transform: rotate(360deg); }
-        }
-    </style>
 </body>
 </html>
